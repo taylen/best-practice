@@ -290,7 +290,8 @@
 
     // 二分查找法的代码中，通过while循环，成 2 倍数的缩减搜索范围，也就是说需要经过 log2^n 次即可跳出循环。
     function binarySearch(arr: <Array>, n: number, target: number) {
-      let l = 0, r = n - 1;
+      let l = 0,
+        r = n - 1;
       while ( l <= r) {
         let mid = l + (r - l) / 2;
         if (arr[mid] == target) return mid;
@@ -303,7 +304,7 @@
     // 将时间复杂度为O(logn)的代码循环N遍的话，那么它的时间复杂度就是 n * O(logn)，即 O(nlogn)
     function hello (n: number) {
       for( let m = 1 ; m < n ; m++){
-        i = 1;
+        let i = 1;
         while( i < n ){
             i = i * 2;
         }
