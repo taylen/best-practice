@@ -220,11 +220,29 @@
 <details>
   <summary>10、不要信任任何数据</summary>
 
+  <p>
+    - 和后台约定返回json，后台一定会返回json格式吗？
+    - 后台数据为空时，字段名称一定还会存在吗？
+    - 凡是依赖外部传入的数据，都不可信，都应进行校验
+  </p>
 </details>
 
 <details>
   <summary>11、使用常量</summary>
 
+  <pre>
+    <code>
+      setTimeout(function() {
+        // do sth
+      }, 300); // 300 代表什么含义？
+
+      =====
+      const CLICK_BROKEN_DELAY = 300;
+      setTimeout(function() {
+        // do sth
+      }, CLICK_BROKEN_DELAY);
+    </code>
+  </pre>
 </details>
 
 <details>
@@ -243,6 +261,54 @@
     - 对数阶O(logn)
     - 线性对数阶O(nlogn)
     </p>
-    <code></code>
+    <code>
+    // 复杂度都是O(1)
+    function add(a: number, b: number): number{
+      return a + b;
+    }
+
+    // for循环里面的代码会执行 n 遍，因此它消耗的时间是随着 n 的变化而变化的，因此可以用O(n)来表示它的时间复杂度
+    function sum (n: number ){
+      let ret = 0;
+      for ( let i = 0 ; i <= n ; i++) {
+          ret += i;
+      }
+      return ret;
+    }
+
+    // 当存在双重循环的时候，即把 O(n) 的代码再嵌套循环一遍，它的时间复杂度就是 O(n²) 
+    function selectionSort(arr: <Array>, n: number){
+      for(let i = 0; i < n ; i++) {
+        let minIndex = i;
+        for (let j = i + 1; j < n ; j++ ) {
+          if (arr[j] < arr[minIndex])
+            minIndex = j;
+        }
+        swap (arr[i], arr[minIndex]);
+      }
+    }
+
+    // 二分查找法的代码中，通过while循环，成 2 倍数的缩减搜索范围，也就是说需要经过 log2^n 次即可跳出循环。
+    function binarySearch(arr: <Array>, n: number, target: number) {
+      let l = 0, r = n - 1;
+      while ( l <= r) {
+        let mid = l + (r - l) / 2;
+        if (arr[mid] == target) return mid;
+        if (arr[mid] > target ) r = mid - 1;
+        else l = mid + 1;
+      }
+      return -1;
+    }
+
+    // 将时间复杂度为O(logn)的代码循环N遍的话，那么它的时间复杂度就是 n * O(logn)，即 O(nlogn)
+    function hello (n: number) {
+      for( let m = 1 ; m < n ; m++){
+        i = 1;
+        while( i < n ){
+            i = i * 2;
+        }
+      }
+    }
+    </code>
   </pre>
 </details>
