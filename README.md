@@ -143,17 +143,77 @@
 <details>
   <summary>7、DOM 访问最小化</summary>
 
+  任何一次DOM访问和操作都比较耗时，我们尽一切可能减少DOM操作
+  - 早期的fragment
+  - 虚拟DOM
+  
 </details>
 
 <details>
   <summary>8、遍历对象的属性的时候，加上一个if语句</summary>
 
-
+  <pre>
+    <p>当检查对象上某个属性是否存在时，hasOwnProperty 是唯一可用的方法。 同时在使用 for in loop 遍历对象时，推荐总是使用 hasOwnProperty 方法， 这将会避免原型对象扩展带来的干扰。
+    </p>
+    <code>
+      for(key in object) {  
+        if(object.hasOwnProperty(key) {  
+            ...then do something...  
+        }  
+      }
+    </code>
+  </pre>
 </details>
 
 <details>
   <summary>9、避免严重嵌套</summary>
+  <pre>
+    <p>
+    如何避免严重嵌套？
+    - 链式调用 Promise
+    - async/await
+    - 多层 if条件 合并为 一层 判断条件
+    </p>
+    <code>
+      if (a > 0) {
+        if (b > 0) {
+          // a > 0 && b > 0
+        } else {
+          // a > 0 && b <= 0
+        }
+      } else {
+        if (c > 0) {
+          // a < 0 && c > 0
+        } else {
+          // a < 0 && c <= 0
+        }
+      }
 
+      ===========
+
+      if (a > 0 && b > 0) {
+        // do sth
+      } else if (a > 0 && b <= 0) {
+        // do sth
+      } else if (a < 0 && c > 0) {
+        // do sth
+      } else {
+        // do sth
+      }
+
+      ============
+
+      if (a <= 0) {
+        return;
+      }
+      if (b > 0) {
+        // a > 0 && b > 0
+      } else {
+        // a > 0 && b <= 0
+      }
+
+    </code>
+  </pre>
 </details>
 
 <details>
@@ -166,3 +226,22 @@
 
 </details>
 
+<details>
+  <summary>12、尽量少的算法复杂度</summary>
+
+  <pre>
+    <p>
+    算法（Algorithm）是指用来操作数据、解决程序问题的一组方法。同一个问题使用不同的算法，虽然结果相同，但消耗的资源和时间却会有很大的区别，那么如何去衡量不同算法之间的优劣呢？主要从算法所占用的「时间」和「空间」两个维度去考量。
+    - 时间维度：是指执行当前算法所消耗的时间，我们通常用「时间复杂度」来描述。
+    - 空间维度：是指执行当前算法需要占用多少内存空间，我们通常用「空间复杂度」来描述。
+
+    我们先从常见的时间复杂度量级进行大O的理解：
+    - 常数阶O(1)
+    - 线性阶O(n)
+    - 平方阶O(n²)
+    - 对数阶O(logn)
+    - 线性对数阶O(nlogn)
+    </p>
+    <code></code>
+  </pre>
+</details>
